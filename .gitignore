@@ -17,5 +17,5 @@ vignettes/*.pdf
 .Rproj.user
 
 .DS_Store
-sanger/*
+
 blast_16SMicrobial_db/*
