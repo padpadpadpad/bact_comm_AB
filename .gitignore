@@ -18,4 +18,4 @@ vignettes/*.pdf
 
 .DS_Store
 
-blast_16SMicrobial_db/*
+sanger/blast_16SMicrobial_db/*
