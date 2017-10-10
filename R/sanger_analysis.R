@@ -122,8 +122,7 @@ consensus_IDs <- purrr::map_df(consensus_list, rBlast_all, database = bl, keep =
 
 # filter the single top hit for each one. Still gives 290 rows as some are at the same identical percentage
 consensus_IDs <- group_by(consensus_IDs, QueryID) %>%
-  arrange(., Perc.Ident) %>%
-  top_n(., 1, row_number()) %>%
+  top_n(., 1, Perc.Ident) %>%
   ungroup() %>%
   mutate(num = 1:n())
 
@@ -148,13 +147,43 @@ consensus_IDs <- consensus_IDs_nest %>%
 
 # BINGO we are in business
 
-# keep columns that we want...
-select(consensus_IDs, QueryID, Perc.Ident, name) %>%
-  write.csv(., 'sanger/consensus_processed.csv', row.names = FALSE)
+# filter consensus_IDs
+consensus_IDs <- group_by(consensus_IDs, QueryID) %>%
+  distinct(., name, .keep_all = TRUE) %>%
+  ungroup() %>%
+  select(., QueryID, Perc.Ident, name) %>%
+  mutate(., num = row_number())
+
+write.csv(consensus_IDs, 'sanger/consensus_processed.csv', row.names = FALSE)
+
+classification_df <- function(x, ...){
+  temp <- taxize::classification(x, ...)
+  temp_df <- data.frame(name = temp[[1]]$name, rank = temp[[1]]$rank, stringsAsFactors = FALSE)
+  return(temp_df)
+}
+  
+# get higher taxonomy using taxize ####
+consensus_IDs <- consensus_IDs %>%
+  nest(name) %>%
+  mutate(., higher_tax = map(data, possibly(classification_df, otherwise = NA, quiet = TRUE), db = 'ncbi')) %>%
+  unnest(higher_tax)
+
+# look at taxonomy levels
+unique(consensus_IDs$rank)
+
+# ranks to keep 
+tax_rank <- c('superkingdom', 'phylum', 'class', 'order', 'family', 'genus', 'species')
+
+consensus_IDs <- filter(consensus_IDs, rank %in% tax_rank) %>%
+  spread(., rank, name) %>%
+  select(., num, QueryID, Perc.Ident, species, genus, family, order, class, phylum, superkingdom) %>%
+  data.frame()
+
+write.csv(consensus_IDs, 'sanger/consensus_processed_higher_taxonomy.csv', row.names = FALSE)
 
 # check for differences between consensus and raw
 spp_raw <- unique(seq_IDs$name)
-spp_consensus <- unique(consensus_IDs$name)
+spp_consensus <- unique(consensus_IDs$species)
 
 spp_raw
 spp_consensus

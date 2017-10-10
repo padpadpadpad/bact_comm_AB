@@ -1,8 +1,21 @@
-"QueryID","Perc.Ident","name"
-"Assembly_3_Contig_2_consensus_10F&R.seq",99.505,"Pseudomonas lini"
-"Assembly_3_Contig_4_consensus_10F&R.seq",99.505,"Cupriavidus campinensis"
-"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Bordetella hinzii LMG 13501"
-"Assembly_3_Contig_6_consensus_10F&R.seq",99.505,"Variovorax paradoxus"
-"Assembly_3_Contig_1_extraction_alignment_consensus_10F&R.seq",99.515,"Agrobacterium fabrum"
-"Assembly_3_Contig_1_consensus_10F&R.seq",100,"Ochrobactrum daejeonense"
-"Assembly_3_Contig_3_consensus_10F&R.seq",100,"Stenotrophomonas rhizophila"
+"QueryID","Perc.Ident","name","num"
+"Assembly_3_Contig_1_consensus_10F&R.seq",100,"Ochrobactrum daejeonense",1
+"Assembly_3_Contig_1_extraction_alignment_consensus_10F&R.seq",99.515,"Agrobacterium fabrum",2
+"Assembly_3_Contig_2_consensus_10F&R.seq",99.505,"Pseudomonas lini",3
+"Assembly_3_Contig_3_consensus_10F&R.seq",100,"Stenotrophomonas rhizophila",4
+"Assembly_3_Contig_4_consensus_10F&R.seq",99.505,"Cupriavidus plantarum",5
+"Assembly_3_Contig_4_consensus_10F&R.seq",99.505,"Cupriavidus pauculus",6
+"Assembly_3_Contig_4_consensus_10F&R.seq",99.505,"Cupriavidus campinensis",7
+"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Bordetella tumulicola",8
+"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Bordetella trematum",9
+"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Achromobacter anxifer",10
+"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Achromobacter aegrifaciens",11
+"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Achromobacter insuavis",12
+"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Achromobacter marplatensis",13
+"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Achromobacter xylosoxidans",14
+"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Achromobacter denitrificans",15
+"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Achromobacter pulmonis",16
+"Assembly_3_Contig_5_consensus_10F&R.seq",99.505,"Bordetella hinzii LMG 13501",17
+"Assembly_3_Contig_6_consensus_10F&R.seq",99.505,"Variovorax paradoxus NBRC 15149",18
+"Assembly_3_Contig_6_consensus_10F&R.seq",99.505,"Variovorax guangxiensis",19
+"Assembly_3_Contig_6_consensus_10F&R.seq",99.505,"Variovorax paradoxus",20
