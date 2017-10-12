@@ -25,6 +25,8 @@ rev_806R <- 'GGACTACNVGGGTWTCTAAT'
 fwd_515F_partial <- 'CGGTAA'
 rev_806R_partial <- 'GGACTA'
 
+# FUNCTIONS I USED ####
+
 # function for all chromatograms
 get_chromatogram <- function(seq_file, output_folder){
   temp <- sangerseqR::read.abif(seq_file)
@@ -40,7 +42,7 @@ primer_presence <- function(seq_file, fwd_primer_seq, rev_primer_seq){
   # load in .ab1 file and get sequence
   temp <- sangerseqR::read.abif(seq_file)
   seq_sang <- sangerseqR::sangerseq(temp)
-  seq <- seq_abif@data$PBAS.2
+  seq <- temp@data$PBAS.2
   
   # create dataframe
   d <- data.frame(name = tools::file_path_sans_ext(basename(seq_file)), 
@@ -59,7 +61,13 @@ trim_and_save <- function(seq_file, output_path, trim_cutoff = 1e-04){
   write(seq, paste(output_path, '/', tools::file_path_sans_ext(basename(seq_file)), '.txt', sep = ''))
 }
 
-# output folder figs
+# load in trimmed files and make into a StringSet from which we can find consensus sequences
+read_and_bind <- function(trimmed_file){
+  temp <- data.frame(file = basename(trimmed_file), seq = read.table(trimmed_file, stringsAsFactors = FALSE)$V1, stringsAsFactors = FALSE)
+  return(temp)
+}
+
+# output folder figs ####
 fig_path <- 'sanger/figs/chromatogram'
 
 # output data folder
@@ -90,12 +98,6 @@ write.csv(file_sum$summaries, 'sanger/20171009_sanger_seq_qualcheck.csv')
 
 # do trimming and re-save files
 walk(files, trim_and_save, output_path = trimmed_path, trim_cutoff = 1e-04)
-
-# load in trimmed files and make into a StringSet from which we can find consensus sequences
-read_and_bind <- function(trimmed_file){
-  temp <- data.frame(file = basename(trimmed_file), seq = read.table(trimmed_file, stringsAsFactors = FALSE)$V1, stringsAsFactors = FALSE)
-  return(temp)
-}
 
 trimmed_files <- list.files(output_path, full.names = TRUE)
 
@@ -128,3 +130,6 @@ printSplitString <- function(x, width=getOption("width") - 1){
 printSplitString(msaConsensusSequence(alignment))
 
 # This may be the limit of the data if I cannot get multiple sequence alignments...
+
+
+

@@ -19,3 +19,5 @@ vignettes/*.pdf
 .DS_Store
 
 sanger/blast_16SMicrobial_db/*
+
+sanger/ref_trainsets/*
